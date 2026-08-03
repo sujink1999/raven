@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { sql } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
@@ -26,20 +27,28 @@ export default async function Home() {
     from funnels f order by f.id desc`;
 
   return (
-    <main style={{ maxWidth: 860, margin: "40px auto", padding: 16, fontFamily: "ui-monospace, monospace", color: "#ddd", background: "#111" }}>
-      <h1 style={{ fontSize: 20 }}>raven</h1>
+    <main style={{ padding: "24px 32px", fontFamily: "ui-monospace, monospace", color: "#ddd", minHeight: "100vh" }}>
+      <header style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
+        <Image src="/raven.png" alt="raven" width={44} height={44} style={{ borderRadius: 10 }} />
+        <div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>raven</div>
+          <div style={{ fontSize: 12, color: "#777" }}>ig comment → dm funnels</div>
+        </div>
+      </header>
 
-      <h2 style={{ fontSize: 14, marginTop: 24, color: "#888" }}>funnels</h2>
+      <h2 style={{ fontSize: 13, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>funnels</h2>
       {funnels.map((f) => (
-        <div key={f.id} style={{ padding: "6px 0", borderBottom: "1px solid #222", fontSize: 13 }}>
+        <div key={f.id} style={{ padding: "8px 0", borderBottom: "1px solid #222", fontSize: 13.5 }}>
           <span style={{ color: f.active ? "#69f0ae" : "#666" }}>{f.active ? "●" : "○"}</span>{" "}
           #{f.id} <b>{f.name}</b> · keyword “{f.keyword}” · {f.started} started · {f.delivered} delivered
         </div>
       ))}
 
-      <h2 style={{ fontSize: 14, marginTop: 24, color: "#888" }}>events (latest 200)</h2>
+      <h2 style={{ fontSize: 13, color: "#888", textTransform: "uppercase", letterSpacing: 1, marginTop: 32 }}>
+        events <span style={{ color: "#555", textTransform: "none", letterSpacing: 0 }}>(latest 200)</span>
+      </h2>
       {events.map((e) => (
-        <div key={e.id} style={{ padding: "4px 0", borderBottom: "1px solid #1a1a1a", fontSize: 12.5 }}>
+        <div key={e.id} style={{ padding: "5px 0", borderBottom: "1px solid #1a1a1a", fontSize: 13 }}>
           <span style={{ color: "#666" }}>{new Date(e.created_at).toISOString().replace("T", " ").slice(0, 19)}</span>{" "}
           <span style={{ color: STYLES[e.type] ?? "#ddd" }}>{e.type}</span>
           {e.funnel_name && <span style={{ color: "#888" }}> · {e.funnel_name}</span>}
