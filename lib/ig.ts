@@ -1,6 +1,7 @@
 // Instagram API (Instagram Login flavor) — messaging + comment primitives.
+import { getToken } from "./token";
+
 const BASE = "https://graph.instagram.com/v23.0";
-const TOKEN = () => process.env.IG_ACCESS_TOKEN!;
 const IG_ID = () => process.env.IG_USER_ID!;
 
 async function post(path: string, body: unknown) {
@@ -8,7 +9,7 @@ async function post(path: string, body: unknown) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${TOKEN()}`,
+      Authorization: `Bearer ${await getToken()}`,
     },
     body: JSON.stringify(body),
   });
@@ -43,7 +44,7 @@ export function replyToComment(commentId: string, text: string) {
 
 export async function isFollower(igUserId: string): Promise<boolean | null> {
   const res = await fetch(
-    `${BASE}/${igUserId}?fields=is_user_follow_business&access_token=${TOKEN()}`
+    `${BASE}/${igUserId}?fields=is_user_follow_business&access_token=${await getToken()}`
   );
   if (!res.ok) return null; // profile API can fail for restricted users — treat as unknown
   const json = await res.json();
