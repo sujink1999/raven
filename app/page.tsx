@@ -32,11 +32,11 @@ export default async function Home() {
         <Image src="/raven.png" alt="raven" width={44} height={44} style={{ borderRadius: 10 }} />
         <div>
           <div style={{ fontSize: 18, fontWeight: 700 }}>raven</div>
-          <div style={{ fontSize: 12, color: "#777" }}>ig comment → dm funnels</div>
+          <div style={{ fontSize: 12, color: "#777" }}>ig comment → dm automations</div>
         </div>
       </header>
 
-      <h2 style={{ fontSize: 13, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>funnels</h2>
+      <h2 style={{ fontSize: 13, color: "#888", textTransform: "uppercase", letterSpacing: 1 }}>automations</h2>
       {funnels.map((f) => (
         <div key={f.id} style={{ padding: "8px 0", borderBottom: "1px solid #222", fontSize: 13.5 }}>
           <span style={{ color: f.active ? "#69f0ae" : "#666" }}>{f.active ? "●" : "○"}</span>{" "}
