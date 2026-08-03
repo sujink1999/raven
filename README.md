@@ -1,4 +1,4 @@
-# vanta-dm
+# raven
 
 Self-hosted ManyChat replacement: IG comment keyword → DM funnel → follow gate → link delivery.
 Next.js on Vercel + Neon Postgres. Own account only, official Instagram API.

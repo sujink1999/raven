@@ -1,4 +1,4 @@
--- vanta-dm schema (hosted Neon Postgres)
+-- raven schema (hosted Neon Postgres)
 
 create table if not exists funnels (
   id serial primary key,
